@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101519">
+  <title>QR CODE GENERATOR</title>
+  <meta name="description" content="Free, private client-side QR code generator supporting URLs, Wi-Fi, vCards, events, email, SMS, phone, and text with custom colors, quiet zones, and vector export.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap">
+  <script src="qrcode-generator.js"></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="masthead">
+      <div class="top-bar">
+        <a class="brand" href="." aria-label="Signal QR home"><span class="brand-mark" aria-hidden="true"></span>Signal QR</a>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Toggle theme">
+          <span class="theme-icon" aria-hidden="true">☾</span>
+          <span class="theme-text">Dark</span>
+        </button>
+      </div>
+      <p class="eyebrow">Make information scannable</p>
+      <h1>QR codes that carry <em>more.</em></h1>
+      <p class="intro">Build custom codes for links, Wi‑Fi credentials, contact cards, calendar events, and more. 100% private — generated in your browser.</p>
+    </header>
+
+    <div class="workspace">
+      <section class="builder card" aria-labelledby="builder-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">01 / Create</p>
+            <h2 id="builder-title">What should it open?</h2>
+          </div>
+          <button id="reset-btn" class="text-button" type="button" title="Reset all input fields and preview">Reset all</button>
+        </div>
+
+        <div class="type-tabs" id="type-tabs" role="tablist" aria-label="QR code data type">
+          <button class="type-tab is-active" type="button" role="tab" aria-selected="true" data-type="url" id="tab-url">URL</button>
+          <button class="type-tab" type="button" role="tab" aria-selected="false" data-type="text" id="tab-text">Text</button>
+          <button class="type-tab" type="button" role="tab" aria-selected="false" data-type="wifi" id="tab-wifi">Wi‑Fi</button>
+          <button class="type-tab" type="button" role="tab" aria-selected="false" data-type="email" id="tab-email">Email</button>
+          <button class="type-tab" type="button" role="tab" aria-selected="false" data-type="phone" id="tab-phone">Phone</button>
+          <button class="type-tab" type="button" role="tab" aria-selected="false" data-type="sms" id="tab-sms">SMS</button>
+          <button class="type-tab" type="button" role="tab" aria-selected="false" data-type="vcard" id="tab-vcard">Contact</button>
+          <button class="type-tab" type="button" role="tab" aria-selected="false" data-type="event" id="tab-event">Event</button>
+        </div>
+
+        <form id="qr-form" novalidate aria-label="QR code content form">
+          <div id="form-fields" class="form-fields"></div>
+          <p class="validation" id="validation" role="alert" aria-live="assertive"></p>
+        </form>
+
+        <section class="presets" aria-labelledby="preset-title">
+          <p class="section-kicker" id="preset-title">Quick sample presets</p>
+          <div class="preset-list" role="group" aria-label="Sample presets">
+            <button class="preset" type="button" data-preset="website"><span>↗</span>Website</button>
+            <button class="preset" type="button" data-preset="wifi"><span>⌁</span>Wi‑Fi network</button>
+            <button class="preset" type="button" data-preset="contact"><span>⊙</span>Contact card</button>
+            <button class="preset" type="button" data-preset="event"><span>◷</span>Calendar</button>
+          </div>
+        </section>
+
+        <details class="customize" open>
+          <summary>
+            <span>Customize style</span>
+            <span class="summary-arrow" aria-hidden="true">+</span>
+          </summary>
+
+          <div class="style-presets-bar">
+            <span class="mini-kicker">Style themes:</span>
+            <div class="style-preset-chips" role="group" aria-label="Color style themes">
+              <button class="style-chip" type="button" data-style="classic" title="Classic black on white">Classic</button>
+              <button class="style-chip" type="button" data-style="navy" title="Deep navy on ice white">Navy</button>
+              <button class="style-chip" type="button" data-style="forest" title="Forest green on mint">Forest</button>
+              <button class="style-chip" type="button" data-style="sunset" title="Deep plum on sunset peach">Sunset</button>
+              <button class="style-chip" type="button" data-style="slate" title="Slate dark mode style">Slate</button>
+            </div>
+          </div>
+
+          <div class="custom-grid">
+            <label class="color-field" for="foreground">Foreground color
+              <span>
+                <input id="foreground" type="color" value="#101519" aria-label="Foreground color picker">
+                <output id="foreground-value" for="foreground">#101519</output>
+              </span>
+            </label>
+            <label class="color-field" for="background">Background color
+              <span>
+                <input id="background" type="color" value="#ffffff" aria-label="Background color picker">
+                <output id="background-value" for="background">#FFFFFF</output>
+              </span>
+            </label>
+
+            <label for="size">Export size
+              <select id="size">
+                <option value="180">Small · 180 px</option>
+                <option value="260" selected>Medium · 260 px</option>
+                <option value="360">Large · 360 px</option>
+                <option value="480">Extra Large · 480 px</option>
+                <option value="640">High Res · 640 px</option>
+              </select>
+            </label>
+
+            <label for="correction">Error correction
+              <select id="correction">
+                <option value="L">Low · 7% (fastest scan)</option>
+                <option value="M" selected>Medium · 15% (standard)</option>
+                <option value="Q">Quartile · 25% (high durability)</option>
+                <option value="H">High · 30% (best for printing)</option>
+              </select>
+            </label>
+
+            <label for="margin">Quiet zone (margin)
+              <select id="margin">
+                <option value="0">None · 0 modules</option>
+                <option value="2">Compact · 2 modules</option>
+                <option value="4" selected>Standard · 4 modules</option>
+                <option value="6">Spacious · 6 modules</option>
+              </select>
+            </label>
+
+            <label class="toggle-field" for="rounded">Rounded modules
+              <span>
+                <input id="rounded" type="checkbox">
+                <span class="toggle" aria-hidden="true"></span>
+              </span>
+            </label>
+          </div>
+
+          <div class="contrast-warning" id="contrast-warning" role="alert" aria-live="polite" hidden>
+            <span aria-hidden="true">⚠</span> Contrast between colors is low. Scanners may struggle to read this code.
+          </div>
+
+          <div class="custom-actions">
+            <button id="reset-custom-btn" class="text-button" type="button">Reset customization to defaults</button>
+          </div>
+        </details>
+      </section>
+
+      <aside class="preview-panel card" aria-labelledby="preview-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">02 / Preview</p>
+            <h2 id="preview-title">Ready to scan</h2>
+          </div>
+          <span class="status-pill" id="preview-status" role="status">Waiting</span>
+        </div>
+
+        <div class="qr-stage" id="qr-stage">
+          <div class="qr-tile" id="qr-tile">
+            <canvas id="qr-canvas" width="260" height="260" aria-label="Generated QR code preview"></canvas>
+            <div class="empty-state" id="empty-state">
+              <span class="empty-grid" aria-hidden="true"></span>
+              <p>Fill in fields on the left to generate code.</p>
+            </div>
+          </div>
+        </div>
+        <p class="payload-label" id="payload-label" aria-live="polite">No content yet</p>
+
+        <div class="export-actions" aria-label="QR code export actions">
+          <button id="download-png" class="button button-primary" type="button" disabled>Download PNG</button>
+          <button id="download-svg" class="button button-secondary" type="button" disabled>Download SVG</button>
+          <button id="copy-btn" class="button button-secondary" type="button" disabled>Copy Image</button>
+          <button id="print-btn" class="button button-secondary" type="button" disabled>Print</button>
+          <button id="share-btn" class="button button-secondary" type="button" disabled hidden>Share</button>
+        </div>
+        <p class="action-message" id="action-message" role="status" aria-live="polite"></p>
+      </aside>
+    </div>
+
+    <section class="history card" aria-labelledby="history-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Local session history</p>
+          <h2 id="history-title">History</h2>
+        </div>
+        <button id="clear-history" class="text-button" type="button" disabled title="Clear all stored history entries">Clear history</button>
+      </div>
+      <p class="history-empty" id="history-empty">Your recent generated QR codes appear here. Click to restore anytime.</p>
+      <ul id="history-list" class="history-list" aria-label="QR code history items"></ul>
+    </section>
+  </main>
+  <script src="qr.js"></script>
+</body>
+</html>
