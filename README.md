@@ -6,7 +6,7 @@ A clean, fully client-side QR code generator. Build codes for links, Wi‑Fi cre
 
 **100% private.** All generation happens in your browser. Nothing is uploaded, stored, or tracked.
 
-![alt text](image-1.png)
+![alt text](image.png)
 
 ---
 
