@@ -46,7 +46,6 @@ Downloaded files use descriptive names, e.g. `qr_wifi_20260825.png`.
 ## Tech stack
 
 - Plain **HTML / CSS / JavaScript** (ES6+). No framework, no build step, no backend.
-- **qrcode-generator** by [Kazuhiko Arase](https://github.com/kazuhikoarase/qrcode-generator) (MIT) with UTF‑8 support — reliable encoding of emoji, CJK, and accented characters. Vendored locally in `qrcode-generator.js`.
 - **Canvas API** for raster rendering, hand-built SVG strings for vector export.
 
 ## Run locally
@@ -76,7 +75,7 @@ qr code/
 ├── index.html          # Page structure & ARIA
 ├── style.css           # Design tokens (light/dark), layout, responsive
 ├── qr.js               # App logic: forms, rendering, export, history
-├── qrcode-generator.js # Vendored qrcode-generator (MIT) + UTF-8 support
+├── qrcode-generator.js # qrcode-generator  + UTF-8 support
 ├── test-runner.js      # Headless Node test suite (no framework)
 └── README.md
 ```
@@ -89,6 +88,3 @@ node test-runner.js
 
 Covers all 8 payload builders, matrix generation for Unicode/emoji at every error-correction level, long-text capacity, clean overflow failure, contrast math, and quiet-zone geometry.
 
-## License
-
-The app source is MIT-licensed. The vendored `qrcode-generator.js` is MIT © 2009–2011 Kazuhiko Arase (QR Code is a registered trademark of Denso Wave Incorporated).
