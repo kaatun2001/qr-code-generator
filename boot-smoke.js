@@ -1,4 +1,4 @@
-// Headless boot + main-flow smoke test for Signal QR.
+// Headless boot + main-flow smoke test for QR Code Generator.
 // Loads qrcode-generator.js and qr.js in a fake DOM, drives a URL generation,
 // and verifies paint, status, history, restore, and clean oversized-content handling.
 const fs = require('fs');

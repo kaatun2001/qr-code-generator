@@ -1,11 +1,10 @@
-# Signal QR
+# QR Code Generator
 
 A clean, fully client-side QR code generator. Build codes for links, Wi‑Fi credentials, contact cards, calendar events, email, SMS, and phone numbers — then style them and export as PNG, SVG, or printed copy.
 
 **100% private.** All generation happens in your browser. Nothing is uploaded, stored, or tracked.
 
-> ![Screenshot](screenshot.png)
-> _Add a screenshot of the app here — capture the main workspace with a generated code in the preview panel._
+![alt text](image-1.png)
 
 ---
 
@@ -21,16 +20,16 @@ A clean, fully client-side QR code generator. Build codes for links, Wi‑Fi cre
 
 ## Supported QR types
 
-| Type | Data encoded |
-|------|--------------|
-| URL | `https://` link (auto-prefixed if missing) |
-| Text | Free-form text |
-| Wi‑Fi | `WIFI:` credential string with escaping |
-| Email | `mailto:` link with subject/body |
-| Phone | `tel:` link |
-| SMS | `SMSTO:` message |
-| Contact | vCard 3.0 (name, org, phone, email, website) |
-| Event | iCalendar event (title, start, end, location, description) |
+| Type    | Data encoded                                               |
+| ------- | ---------------------------------------------------------- |
+| URL     | `https://` link (auto-prefixed if missing)                 |
+| Text    | Free-form text                                             |
+| Wi‑Fi   | `WIFI:` credential string with escaping                    |
+| Email   | `mailto:` link with subject/body                           |
+| Phone   | `tel:` link                                                |
+| SMS     | `SMSTO:` message                                           |
+| Contact | vCard 3.0 (name, org, phone, email, website)               |
+| Event   | iCalendar event (title, start, end, location, description) |
 
 ## Export options
 
@@ -40,7 +39,7 @@ A clean, fully client-side QR code generator. Build codes for links, Wi‑Fi cre
 - **Print** — opens a print-ready page.
 - **Share** — native share sheet when the browser supports it.
 
-Downloaded files use descriptive names, e.g. `signal-qr-wifi-260px.png`.
+Downloaded files use descriptive names, e.g. `qr_wifi_20260825.png`.
 
 ## Tech stack
 

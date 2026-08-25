@@ -280,7 +280,7 @@
         const calLines = [
           'BEGIN:VCALENDAR',
           'VERSION:2.0',
-          'PRODID:-//Signal QR//EN',
+          'PRODID:-//QR Code Generator//EN',
           'BEGIN:VEVENT',
           `SUMMARY:${escapeVCard(v.title)}`,
           `DTSTART:${eventDate(v.start)}`,
@@ -562,7 +562,7 @@
       const safeDesc = escapeHtml(shortPayload(currentPayload, 120));
 
       const doc = win.document;
-      doc.title = 'Print QR Code · Signal QR';
+      doc.title = 'Print QR Code · QR Code Generator';
       const style = doc.createElement('style');
       style.textContent = 'body{display:grid;place-items:center;min-height:100vh;margin:0;font-family:Arial,sans-serif;background:#fff;color:#111}main{text-align:center;padding:24px}img{width:min(80vw,420px);height:auto;display:block;margin:0 auto 16px}h2{font-size:18px;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.05em}p{font-size:13px;color:#555;max-width:500px;word-break:break-all;margin:0}';
       doc.head.appendChild(style);
@@ -598,13 +598,13 @@
       if (!blob) throw new Error('Blob conversion failed');
       const filename = getFilename('png');
       const file = new File([blob], filename, { type: 'image/png' });
-      const dataWithFile = { title: 'Signal QR Code', text: `Scannable ${type} QR Code`, files: [file] };
+      const dataWithFile = { title: 'QR Code Generator', text: `Scannable ${type} QR Code`, files: [file] };
 
       if (navigator.canShare && navigator.canShare(dataWithFile)) {
         await navigator.share(dataWithFile);
         showMessage('QR code shared successfully!', 'success');
-      } else if (navigator.canShare && navigator.canShare({ title: 'Signal QR', text: currentPayload })) {
-        await navigator.share({ title: 'Signal QR Code', text: currentPayload });
+      } else if (navigator.canShare && navigator.canShare({ title: 'QR Code Generator', text: currentPayload })) {
+        await navigator.share({ title: 'QR Code Generator', text: currentPayload });
         showMessage('Shared link/content!', 'success');
       } else {
         showMessage('Direct sharing is not supported on this device. Download PNG instead.', 'error');

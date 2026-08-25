@@ -2,7 +2,7 @@ const fs = require('fs');
 const vm = require('vm');
 const assert = require('assert');
 
-console.log('--- Starting Signal QR Unit & Integration Tests ---');
+console.log('--- Starting QR Code Generator Unit & Integration Tests ---');
 
 // 1. Load qrcode-generator.js (qrcode-generator + UTF-8 support)
 const qrCodeJs = fs.readFileSync('qrcode-generator.js', 'utf8');
@@ -163,7 +163,7 @@ function buildPayload(type, v) {
       const calLines = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
-        'PRODID:-//Signal QR//EN',
+        'PRODID:-//QR Code Generator//EN',
         'BEGIN:VEVENT',
         `SUMMARY:${escapeVCard(v.title)}`,
         `DTSTART:${eventDate(v.start)}`,
@@ -255,7 +255,7 @@ const payloads = {
   phone: 'tel:+15550123456',
   sms: 'SMSTO:5551234567:Hello 🌍!',
   vcard: 'BEGIN:VCARD\r\nVERSION:3.0\r\nN:Doe;Jane;;;\r\nFN:Jane Doe\r\nEND:VCARD',
-  event: 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Signal QR//EN\r\nBEGIN:VEVENT\r\nSUMMARY:Ärger\r\nDTSTART:20260901T100000\r\nDTEND:20260901T113000\r\nEND:VEVENT\r\nEND:VCALENDAR'
+  event: 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//QR Code Generator//EN\r\nBEGIN:VEVENT\r\nSUMMARY:Ärger\r\nDTSTART:20260901T100000\r\nDTEND:20260901T113000\r\nEND:VEVENT\r\nEND:VCALENDAR'
 };
 
 ['L', 'M', 'Q', 'H'].forEach((level) => {
