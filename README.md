@@ -1,5 +1,7 @@
 # QR Code Generator
 
+[🚀 Live Demo](https://qr-code-generator-5y2yanvg6-sadik18.vercel.app/)
+
 A clean, fully client-side QR code generator. Build codes for links, Wi‑Fi credentials, contact cards, calendar events, email, SMS, and phone numbers — then style them and export as PNG, SVG, or printed copy.
 
 **100% private.** All generation happens in your browser. Nothing is uploaded, stored, or tracked.
